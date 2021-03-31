@@ -1,3 +1,4 @@
+import React from 'react';
 import AddPet from '../AddPet/AddPet';
 import History from '../History/History';
 

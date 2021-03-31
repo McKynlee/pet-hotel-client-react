@@ -1,5 +1,6 @@
-function History() {
+import React from 'react';
 
+function History() {
 
   return (
     <>
