@@ -1,12 +1,19 @@
-// import AddPet from '../AddPet/AddPet';
-
+import AddPet from '../AddPet/AddPet';
+import History from '../History/History';
 
 function Dashboard() {
 
 
   return (
     <>
-      {/* <AddPet /> */}
+      <div>
+        <AddPet />
+      </div>
+
+
+      <div>
+        <History />
+      </div>
 
     </>
   )

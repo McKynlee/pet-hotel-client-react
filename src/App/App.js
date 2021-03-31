@@ -7,7 +7,7 @@ import {
 
 
 // import HomePage from '../HomePage/HomePage';
-// import AddPet from '../AddPet/AddPet';
+import AddPet from '../AddPet/AddPet';
 import Header from '../Header/Header';
 import Dashboard from '../Dashboard/Dashboard';
 import Owner from '../Owner/Owner';
