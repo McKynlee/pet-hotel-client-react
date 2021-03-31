@@ -1,6 +1,4 @@
 function History() {
-
-
   return (
     <>
       <header>History</header>
@@ -27,9 +25,8 @@ function History() {
           </tr>
         </tbody>
       </table>
-
-
-
     </>
-  )
+  );
 }
+
+export default History;
