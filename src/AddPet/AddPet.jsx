@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-
-
 function AddPet() {
 
   const [petName, setPetName] = useState('');
