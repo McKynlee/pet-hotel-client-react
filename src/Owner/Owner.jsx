@@ -3,9 +3,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Owner() {
+
+  const dispatch = useDispatch();
+  const [newOwner, setNewOwner] = useState('');
+
   useEffect(() => {
     dispatch({ type: "FETCH_OWNERS" });
   }, []);
+
 
   const dispatch = useDispatch();
   const [newOwner, setNewOwner] = useState("");
@@ -18,6 +23,17 @@ function Owner() {
   //console.log('name is', name)
   const addOwner = (event) => {
     event.preventDefault();
+
+    console.log('*** <Owner /> -> addOwner() ***');
+    console.log('newOwner:', newOwner);
+
+    dispatch({
+      type: "CREATE_OWNER",
+      payload: {
+        name: newOwner
+      }
+    })
+    
     console.log("*** <Owner /> -> addOwner() ***");
     console.log("newOwner:", newOwner);
     dispatch({
@@ -26,6 +42,7 @@ function Owner() {
         name: newOwner,
       },
     });
+ 
   };
 
   return (
