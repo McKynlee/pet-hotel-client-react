@@ -1,31 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function AddPet() {
+  useEffect(() => {
+    getOwners();
+  }, []);
+
+  const dispatch = useDispatch();
 
   const [petName, setPetName] = useState('');
   const [petColor, setPetColor] = useState('');
   const [petBreed, setPetBreed] = useState('');
-  const [ownerName, setOwnerName] = useState('');
+  const [ownerName, setOwnerName] = useState(0);
 
+  const owners = useSelector((store) => store.owners);
 
+  /* 
+    Function gets list of all owners from db for 
+    dropdown population
+  */
+  const getOwners = () => {
+    dispatch({
+      type: 'FETCH_OWNERS',
+    });
+  };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('submit clicked');
 
-
-
-  const handleSubmit = () => {
-    console.log("submit clicked")
-  }
-
-
-
-
+    dispatch({
+      type: 'ADD_PET',
+      payload: {
+        owners_id: ownerName,
+        name: petName,
+        breed: petBreed,
+        color: petColor,
+      },
+    });
+  };
 
   return (
     <>
       <div>
         <h2>Add Pet</h2>
-        <form>
-
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Pet Name"
@@ -50,19 +69,22 @@ function AddPet() {
             value={ownerName}
             onChange={(event) => setOwnerName(event.target.value)}
           >
-            <option>Name 1</option>
-            <option>Name 2</option>
-            <option>Name 3</option>
+            <option value="1">Owner 1</option>
+            <option value="2">Owner 2</option>
+            {/* {owners.map((owner, i) => {
+              return (
+                <option key={i} value={owner.id}>
+                  {owner.name}
+                </option>
+              );
+            })} */}
           </select>
 
-          <button onClick={handleSubmit}>Submit</button>
+          <button>Submit</button>
         </form>
       </div>
-
-
     </>
-  )
+  );
 }
-
 
 export default AddPet;
