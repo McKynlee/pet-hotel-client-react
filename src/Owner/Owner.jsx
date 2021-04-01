@@ -13,7 +13,9 @@ function Owner() {
 
     dispatch({
       type: "CREATE_OWNER",
-      payload: newOwner
+      payload: {
+        name: newOwner
+      }
     })
   };
 

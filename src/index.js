@@ -37,7 +37,6 @@ function* addNewOwner(action) {
     console.log('ERROR posting new owner:', error);
 
   }
-
 }
 
 const store = createStore(
