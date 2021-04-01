@@ -3,12 +3,20 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Owner() {
+  const dispatch = useDispatch();
   const [newOwner, setNewOwner] = useState('');
 
   const addOwner = (event) => {
     event.preventDefault();
     console.log('*** <Owner /> -> addOwner() ***');
+    console.log('newOwner:', newOwner);
+
+    dispatch({
+      type: "CREATE_OWNER",
+      payload: newOwner
+    })
   };
+
   return (
     <>
       <h2>Add Owner</h2>
