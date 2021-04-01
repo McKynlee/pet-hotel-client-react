@@ -20,6 +20,7 @@ function* rootSaga() {
   yield takeEvery('CREATE_OWNER', addNewOwner);
   // yield takeEvery("FETCH_OWNERS", fetchOwners);
   yield takeEvery('ADD_PET', addNewPet);
+  yield takeEvery('FETCH_PETS', fetchPets);
 }
 
 function* addNewOwner(action) {
@@ -45,8 +46,22 @@ function* addNewPet(action) {
 
   try {
     yield axios.post('/pets', newPet);
+
+    yield put({
+      type: 'FETCH_PETS',
+    });
   } catch (error) {
     console.log('ERROR posting new pet:', error);
+  }
+}
+
+function* fetchPets(action) {
+  console.log('fetchPets saga');
+
+  try {
+    yield axios.get('/pets');
+  } catch (error) {
+    console.log('ERROR getting all pets:', error);
   }
 }
 
