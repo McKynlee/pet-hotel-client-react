@@ -16,6 +16,27 @@ const sagaMiddleware = createSagaMiddleware();
 // {return state;}` for each reducer (variable) needed ->
 // listed before next line'
 
+const pets = (
+  state = [
+    {
+      owners_id: 0,
+      name: '',
+      breed: '',
+      color: '',
+      checked_in: false,
+      checked_in_date: '2021-04-01',
+    },
+  ],
+  action
+) => {
+  switch (action.type) {
+    case 'SET_PETS':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 function* rootSaga() {
   yield takeEvery('CREATE_OWNER', addNewOwner);
   // yield takeEvery("FETCH_OWNERS", fetchOwners);
@@ -59,7 +80,12 @@ function* fetchPets(action) {
   console.log('fetchPets saga');
 
   try {
-    yield axios.get('/pets');
+    const pets = yield axios.get('/pets');
+
+    yield put({
+      type: 'SET_PETS',
+      payload: pets.data,
+    });
   } catch (error) {
     console.log('ERROR getting all pets:', error);
   }
@@ -68,6 +94,7 @@ function* fetchPets(action) {
 const store = createStore(
   combineReducers({
     addNewOwner,
+    pets,
   }),
   applyMiddleware(logger, sagaMiddleware)
 );
